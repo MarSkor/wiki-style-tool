@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sass": "node-sass styles/sass/main.scss dist/css/style.css -w"
+    "sass": "sass scss/main.scss dist/css/main.css -w"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/MarSkor/wiki-style-tool#readme",
   "dependencies": {
-    "feather-icons": "^4.29.0",
-    "sass": "^1.52.3"
+    "feather-icons": "^4.29.0"
+  },
+  "devDependencies": {
+    "sass": "^1.97.3"
   }
 }

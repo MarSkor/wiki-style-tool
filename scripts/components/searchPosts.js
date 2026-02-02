@@ -1,68 +1,57 @@
 import { wpUrl } from "../settings/baseurl.js";
 
-const postsUrl = wpUrl + "/wp/v2/search";
+const postsUrl = wpUrl + "/wp/v2/posts?per_page=100";
 
-(async function(){
-    try{
-        const response = await fetch(postsUrl);
-        const posts = await response.json();
-        // console.log("posts", posts)
-        
-        searchPosts(posts)
+(async function () {
+  try {
+    const response = await fetch(postsUrl);
+    const posts = await response.json();
 
-    }catch(error){
-        console.log(error);
-    }
-
+    searchPosts(posts);
+  } catch (error) {
+    console.log(error);
+  }
 })();
 
-const searchInput = document.querySelector("#search-input")
+const searchInput = document.querySelector("#search-input");
 const searchResults = document.querySelector(".search-results");
 
+export default function searchPosts(val) {
+  searchInput.onkeyup = function (e) {
+    const userInput = e.target.value.toLowerCase().trim();
 
+    if (userInput.length > 0) {
+      const filteredArray = val.filter((post) => {
+        return post.title.rendered.toLowerCase().includes(userInput);
+      });
 
-//from https://www.youtube.com/watch?v=twq69gJgaaI NSCODE with adjustments
-export default function searchPosts(val){
-    let userInput;
-    let filteredArray = [];
-
-    searchInput.onkeyup = function(e){
-        userInput = e.target.value.toLowerCase();
-        if(userInput){
-            filteredArray = val.filter((post) => {
-                return post.title.toLowerCase().includes(userInput);
-            })
-            filteredArray = filteredArray.map((post) => {
-                return `<li><a href=postdetails.html?id=${post.id}>${post.title}</a></li>`
-            })
-            // console.log(filteredArray)
-            showResults(filteredArray)
-            let allList = searchResults.querySelectorAll("li");
-            for(let index = 0; index < allList.length; index++){
-                allList[index].setAttribute("onclick", setItem)
-            }
-        }
-        else{
-            searchResults.innerHTML="";
-            searchResults.classList.remove("inactive")
-        }
+      showResults(filteredArray, userInput);
+    } else {
+      searchResults.innerHTML = "";
+      searchResults.classList.add("inactive");
     }
+  };
 
-    const showResults = (list) => {
-        let suggestedPosts;
-        if(list.length){
-            suggestedPosts = list.join("");
-        }
-        else{
-            suggestedPosts = "<li>" + userInput +"</li>"
-        }
-        searchResults.innerHTML = suggestedPosts
-    }
+  const showResults = (list, userInput) => {
+    searchResults.innerHTML = "";
+    searchResults.classList.remove("inactive");
 
-    const setItem = (e) => {
-        searchInput.value = e.target.innerHTML;
-        if(searchInput.value){
-            searchResults.classList.add("inactive")
-        }
+    if (list.length === 0) {
+      searchResults.innerHTML = `<li class="list-group-item">No results for "${userInput}"</li>`;
+    } else {
+      list.forEach((post) => {
+        const li = document.createElement("li");
+
+        li.innerHTML = `<a href="postdetails.html?id=${post.id}">${post.title.rendered}</a>`;
+
+        li.addEventListener("click", () => {
+          searchInput.value = post.title.rendered;
+          searchResults.innerHTML = "";
+          searchResults.classList.add("inactive");
+        });
+
+        searchResults.appendChild(li);
+      });
     }
+  };
 }

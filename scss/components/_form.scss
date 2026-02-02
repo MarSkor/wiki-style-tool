@@ -1,46 +1,62 @@
-.container-form{
-    max-width:750px;
+.container-form {
+  max-width: 750px;
 }
 
-.login-form{
-    max-width: 400px;
-    padding-top: 100px;
+.login-form {
+  max-width: 400px;
+  padding-top: 100px;
 }
 
-.container-form, .login-form{
-    margin: 0 auto;
+.container-form,
+.login-form {
+  margin: 0 auto;
 }
 
-.search-wrapper{
-    position: relative;
-    z-index: 999;
+.search-wrapper {
+  position: relative;
+  z-index: 1100;
 }
 
-.search-results{
-    width:100%;
-    color:$color-text-primary;
-    position:absolute;
-    right:0;
-    top:100%
+.search-results {
+  width: 100%;
+  color: $color-text-primary;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-height: 280px;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
 }
 
-.inactive{
-    display: none;
+.search-results.inactive {
+  display: none;
 }
 
-.search-wrapper .search-results{
-    max-height: 280px;
-    overflow-y: auto;
-    background: $white;
+.search-wrapper .search-results {
+  max-height: 280px;
+  overflow-y: auto;
+  background: $white;
 }
 
-.search-results li{
-    list-style: none;
-    padding: 8px 12px;
-    border-radius: 3px;
+.search-results li {
+  list-style: none;
+  padding: 10px 15px;
+  border-bottom: 1px solid #3929c2;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.search-results li a{
-    text-decoration: none;
+.search-results li:hover {
+  background-color: #f1f1f1;
 }
 
+.search-results li a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}

@@ -1,1 +1,1 @@
-export const wpUrl = "https://designanddev.one/sp-resit/wp-json";
+export const wpUrl = "https://dev-wiki-style-backend.pantheonsite.io/wp-json";
