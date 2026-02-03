@@ -7,6 +7,11 @@
     <title>Frontsources</title>
     <link rel="stylesheet" href="dist/css/main.css" />
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://esm.sh/@wooorm/starry-night@3/style/both"
+    />
   </head>
   <body>
     <!-- Navigation -->
@@ -167,7 +172,12 @@
       integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
       crossorigin="anonymous"
     ></script>
-
+    <script type="module">
+      import {
+        common,
+        createStarryNight,
+      } from "https://esm.sh/@wooorm/starry-night@3?bundle";
+    </script>
     <script>
       feather.replace();
     </script>

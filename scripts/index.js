@@ -20,16 +20,14 @@ async function fetchPostData() {
 
     const posts = await data1.json();
     const recentPosts = await data2.json();
-    // console.log("data1", posts);
-    // console.log("data2", recentPosts);
 
     displayPosts(posts);
     recentPostsList(recentPosts);
 
     return [posts, recentPosts];
   } catch (err) {
-    console.log(err);
-    msgFunction("error", "An error occured", ".list-group-posts");
+    // console.log(err);
+    msgFunction("error", "An error occurred", ".list-group-posts");
   }
 }
 
